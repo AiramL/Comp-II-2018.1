@@ -7,7 +7,7 @@ def inserirDisciplina(gradeCurricular):
     if numRequisitos != 0:
         requisitos = []
         for contador in range(numRequisitos):
-            requisitos +=  [raw_input("\nQual eh o codigo da disciplina que eh o" + str(contador+1) + "º pre-requisito?\n")]
+            requisitos +=  [raw_input("\nQual eh o codigo da disciplina que eh o " + str(contador+1) + "º pre-requisito?\n")]
 
     else:
         requisitos = []
