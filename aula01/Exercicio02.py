@@ -5,9 +5,11 @@ def inserirDisciplina(gradeCurricular):
     codigo = raw_input("\nQual o codigo da disciplina?\n")
     numRequisitos = int(raw_input("\nQual o numero de requisitos da disciplina?\n"))
     if numRequisitos != 0:
-        requisito = raw_input("\nQuais são os codigos das disciplinas que são pre-requisitos?\n")
+        requisitos = []
+        for contador in range(numRequisitos):
+            requisitos +=  [raw_input("\nQual eh o codigo da disciplina que eh o" + str(cont+1) + "º pre-requisito?\n")]
 
     else:
-        requisito = []
+        requisitos = []
     montarGradeCurricular(gradeCurricular, codigo, nome, numRequisitos, requisito)
     return gradeCurricular
