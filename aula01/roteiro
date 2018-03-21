@@ -1,0 +1,63 @@
+MAB225 – Computação II – Aula Prática 1
+
+Objetivo: revisar alguns conceitos de Python: listas, dicionários, laços de iteração, condicionais e funções.
+Considere a grade de disciplinas da Engenharia Mecânica. As funções construídas deverão trabalhar com a variável gradeCurriculas, cujo tipo é uma lista que contêm dicionários. Cada dicionário possui as chaves ‘codigo’, ‘nome’, ‘numRequisitos’ e ‘requisitos’. Os conteúdos guardados nas chaves ‘codigo’ e ‘nome’ é do tipo string. O conteúdo de ‘numRequisitos’ é um inteiro não negativo e o conteúdo de ‘requisitos’ é uma lista de strings cujo tamanho depende de ‘numRequisitos’. Se ‘numRequisitos’ for igual a 0, ‘requisitos’ é uma lista vazia. Se ‘numRequisitos’ for maior que 0, as strings contidas na lista de ‘requistos’ devem ser iguais aos códigos das disciplinas que são pré-requisitos para cursar a disciplina cujo código está armazenado em ‘codigo’. Veja o seguinte exemplo:
+gradeCurricular = [{'codigo':'MAC118', 'nome':'CalculoI', 'numRequisitos':0, 'requisitos':['']}, {'codigo':'FIT112', 'nome':'FisicaI', 'numRequisitos':0, 'requisitos':['']}, {'codigo': FIT122, 'nome':' FisicaII ', 'numRequisitos':2, 'requisitos':[' MAC118 ', 'FIT112']}]
+
+1.	Crie uma função que possui o seguinte cabeçalho:
+def montarGradeCurricular(gradeCurricular,codigo,nome,numRequisitos,requisitos):
+Essa função deve receber a variável gradeCurricular (lista de dicionários mostrada acima), adicionar a essa variável uma nova disciplina com código, nome, número de requisitos e requisitos recebidos, e retornar gradeCurricular. Isto é, montarGradeCurricular acrescenta mais um item à lista gradeCurricular. Lembre-se de verificar se a disciplina que está sendo inserida já existia na lista antes de inseri-la.
+2.	Crie a seguinte função:
+ def inserirDisciplina(gradeCurricular):
+Essa função deve pedir ao usuário o código, nome, número de requisitos, e requisitos da disciplina que ele quer adicionar e chamar montarGradeCurricular para adicionar essa disciplina à variável gradeCurricular. A variável gradeCurricular deve ser retornada. Se a disciplina já existir, a função deve escrever uma mensagem para o usuário dizendo que disciplina não pôde ser adicionada porque ela já existia. Se ela for corretamente adionada a função também deve escrever uma mensagem para o usuário informando isso.
+3.	Teste essas duas funções através de linha de comando. Se elas estiverem funcionando corretamente, leia conteúdo do arquivo “gradeCurricular.txt” e crie a variável gradeCurricular com a sua função montarGradeCurricular. Considere as seguintes funções para manipulação de arquivo:
+
+Para abrir o arquivo:
+arquivo = open(‘path\gradeCurricular.txt’, ‘r’)
+Para ler uma linha do arquivo:
+linha = arquivo.readline()
+Após a execução do comando acima, linha é uma variável do tipo string que contém o conteúdo de uma linha do arquivo. No caso, na primeira vez que arquivo.readline() for executado, linha será: 'MAB114,CompI,0,\n' . Na segunda vez, linha será igual ao conteúdo da segunda linha do arquivo e assim por diante. Quando o arquivo terminar, linha será igual a uma string vazia. Logo, linha pode ser usada como argumento de um ‘while’ para que todas as linhas do arquivo sejam lidas. A cada linha, montarGradeCurricular pode ser chamada para inserir a disciplina lida à variável gradeCurricular. Veja que o conteúdo que deve ser inserido no dicionário está separado por vírgulas. Para separar o conteúdo use o método “split()”:
+
+s.split([sep[, maxsplit]])
+Retorna uma lista de palavras da string s. Os parâmetros sep e maxsplit são opcionais. Se o parâmetro opcional sep não existir, as palavras são separadas por strings arbitrárias de espaços em branco (espaço, tab, nova linha...). Se o argumento sep existir, ele especifica a string a ser usada como separador. A lista retornada terá tamanho igual ao número de separadores encontrados mais um. Se maxsplit for dado, ocorrem no máximo maxsplit divisões. O restante da string é retornado como o elemento final da lista (logo, a lista possui no máximo maxsplit+1 elementos). Se maxsplit não for especificado ou for igual    a   -1 não há um limite para o número de separações.
+
+Lembre-se de fechar o arquivo quando ele terminar de ser lido:
+arquivo.close()
+
+4.	Crie mais algumas funções:
+
+a)	def excluirDisciplina(gradeCurricular): 
+# Pede que o usuário escreva o nome ou o código da disciplina que quer excluir da variável gradeCurricular e exclui a disciplina se ela existir ou avisa que a disciplina não foi encontrada se ela não existir
+
+b)	def alterarDisciplina(gradeCurricular): 
+# Pede que o usuário escreva o nome ou o código da disciplina que quer alterar da variável gradeCurricular e avisa se a disciplina não for encontrada. Se ela for encontrada, imprime as atuais informações sobre ela e pergunta se (chave por chave) se o usuário quer alterar o conteúdo. Se a resposta for ‘sim’, permite que o usuário altere o conteúdo referente àquela chave. Se for não, passa para a próxima chave. Lembre-se que chave requisitos depende da chave ‘numRequisitos’.
+
+c)	def mostrarGradeCurricular(gradeCurricular):
+# Imprime todas as disciplinas presentes em gradeCurricular da seguinte forma:
+Disciplina: EEK200
+Nome: Introducao a Eng Mecanica
+Quantidade de pre-requisitos: 0
+
+Disciplina: MAB225
+Nome: CompII
+Quantidade de pre-requisitos: 1
+Pre-requisitos: ['MAB114']
+
+d)	def mostrarDisciplina(gradeCurricular):
+# Pede que o usuário digite o código ou nome da disciplina que quer visualizar e mostra os detalhes dessa disciplina (se a disciplina não existir deve avisar que a disciplina não foi encontrada):
+
+Disciplina: MAB225
+Nome: CompII
+Quantidade de pre-requisitos: 1
+Pre-requisitos: ['MAB114']
+
+e)	def mostrarDisciplinasPresas(gradeCurricular):
+# Pede que o usuário digite o código ou nome de uma disciplina e mostra os detalhes das disciplinas que são presas pelo código (ou nome) digitado. Se a disciplina não existir, o usuário deve ser informado. Se ela não prender nenhuma outra matéria o usuário também deve ser informado. Não é necessário mostrar dois níveis de disciplinas presas. Por exemplo, Cálculo I prende Cálculo II que por sua vez prende Cálculo III. Se o usuário quiser saber quais matérias são presas por Cáculo I basta que Cálculo II apareça.
+
+f)	def mostrarDisciplinasFaltam(disciplinasCursadas,gradeCurricular):
+# Recebe a variável disciplinasCursadas do tipo set e gradeCurricular. disciplinasCursadas possui os códigos das disciplinas já cursadas pelo usuário. Por exemplo: disciplinasCursadas = {'MAB114','MAC118','FIT112'}. A função deve verificar quais disciplinas ainda não foram cursadas e mostrar o código dessas disciplinas para o usuário. Lembre-se que para criar um set vazio você pode fazer s = set() e para . Para imprimir cada elemento do set você pode fazer for i in s: print i. 
+
+g)	def disciplinasDisponiveis(disciplinasCursadas,gradeCurricular):
+# Recebe a variável disciplinasCursadas do tipo set e gradeCurricular. Da mesma forma que na questão acima, disciplinasCursadas possui os códigos das disciplinas já cursadas pelo usuário. Por exemplo: disciplinasCursadas = {'MAB114','MAC118','FIT112'}. Verifica, dentre as disciplinas que ainda não foram cursadas, quais podem ser cursadas pelo usuário e imprime os seus códigos. As disciplinas que podem ser cursadas são aquelas cujos pré-requisitos já foram atendidos (ou que não possuem pré-requisitos).
+
+5.	Ao terminar, teste cada uma das suas funções. 
